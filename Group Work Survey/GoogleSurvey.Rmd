@@ -1,0 +1,36 @@
+---
+title: "Collecting Viewpoints of User in Using Internet Platform Google"
+author: "Jose Roland Juntanilla, Charles Daniel Songaling, Aaron John Fermano"
+date: "2024-04-18"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(readr)
+data_survey <- read.csv("Google Platform Survey.csv")
+data_survey
+
+```
+# Factoring Age
+```{r}
+library(ggplot2)
+Participants <- as.factor(data_survey$Gender)
+```
+
+```{r}
+
+ggplot(data = data_survey, aes(x = Participants,fill=Participants)) +
+  geom_bar() +
+  labs(title = "Gender of Participants", x = "Gender", y = "Count") +
+  scale_fill_manual(values = c("pink","violet","blue","orange"))
+  theme_minimal()
+```
+# Plotting Age
+```{r}
+is.numeric(data_survey$Age)
+data_survey$Age =
+```
