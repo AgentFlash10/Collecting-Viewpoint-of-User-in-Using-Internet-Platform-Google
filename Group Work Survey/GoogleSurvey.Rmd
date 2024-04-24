@@ -32,5 +32,5 @@ ggplot(data = data_survey, aes(x = Participants,fill=Participants)) +
 # Plotting Age
 ```{r}
 is.numeric(data_survey$Age)
-data_survey$Age =
+data_survey$Age =d
 ```
