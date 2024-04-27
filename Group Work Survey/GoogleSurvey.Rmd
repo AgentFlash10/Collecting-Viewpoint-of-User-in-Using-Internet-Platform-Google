@@ -5,9 +5,7 @@ date: "2024-04-18"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
+
 
 ```{r}
 library(readr)
@@ -29,8 +27,337 @@ ggplot(data = data_survey, aes(x = Participants,fill=Participants)) +
   scale_fill_manual(values = c("pink","violet","blue","orange"))
   theme_minimal()
 ```
+
 # Plotting Age
 ```{r}
-is.numeric(data_survey$Age)
-data_survey$Age =d
+Participants_Age <- as.factor(data_survey$Age)
+ggplot(data_survey, aes(x=Participants_Age, fill=Participants_Age)) +
+  geom_bar() +
+  labs(title="Age of Respondents", x="Age", y="Count") + theme_minimal()
+```
+
+#Marital Status
+```{r}
+data_survey$Marital.Status <- as.factor(data_survey$Marital.Status)
+
+ggplot(data_survey, aes(x = Marital.Status, fill = Marital.Status)) +
+  geom_bar() +
+  labs(title = "Marital Status of Respondents", x = "Marital Status", y = "Count") +
+  scale_fill_manual(values = c("orange", "red", "black","green","")) + 
+  theme_minimal() + theme(plot.title = element_text(size = 8), 
+        axis.title = element_text(size = 8), 
+        axis.text = element_text(size = 8),  
+        legend.title = element_text(size = 8), 
+        legend.text = element_text(size = 8)) + 
+  scale_fill_discrete(name = "Google Platforms")+ theme(axis.text.x = element_text(angle = 60, hjust = 1))
+```
+
+#Employment Status
+```{r}
+data_survey$Employment.Status <- as.factor(data_survey$Employment.Status)
+ggplot(data_survey, aes(x=Employment.Status, fill=Employment.Status)) +
+  geom_bar() +
+  labs(title="Employment Status of Respondents", x="Employment Status", y="Count") + theme_minimal() + theme(plot.title = element_text(size = 8), 
+        axis.title = element_text(size = 8), 
+        axis.text = element_text(size = 8),  
+        legend.title = element_text(size = 8), 
+        legend.text = element_text(size = 8)) + 
+  scale_fill_discrete(name = "Google Platforms")+ theme(axis.text.x = element_text(angle = 60, hjust = 1))
+```
+
+#Internet Usage per Day
+```{r}
+Internet_Time <- as.factor(data_survey$How.much.time.do.you.spend.on.using.the.Internet.each.day)
+
+
+ggplot(data_survey, aes(x=Internet_Time, fill=Internet_Time)) +
+  geom_bar() +
+  labs(title="Internet Usage per Day of Respondents", x="Internet Usage per Day", y="Count") +  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+#How often do you use Google platforms?
+```{r}
+Usage <- as.factor(data_survey$How.often.do.you.use.Google.platforms)
+
+ggplot(data_survey, aes(x=Usage, fill=Usage)) +
+  geom_bar() +
+  labs(title="How often Respondents Use Google Platforms", x="Google Platforms Usage", y="Count") + theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+#What devices do you use when using Google platforms
+```{r}
+Devices <- gsub(";", ",", data_survey$What.devices.do.you.use.when.using.Google.platforms)
+
+Devices <- as.factor(data_survey$What.devices.do.you.use.when.using.Google.platforms)
+
+ggplot(data_survey, aes(x=Devices, fill=Devices)) +
+  geom_bar() +
+  labs(title="Devices Used by Respondents", x="Devices Used", y="Count") + theme_minimal() + theme(plot.title = element_text(size = 8), 
+        axis.title = element_text(size = 8), 
+        axis.text = element_text(size = 8),  
+        legend.title = element_text(size = 8), 
+        legend.text = element_text(size = 8)) + 
+  scale_fill_discrete(name = "Google Platforms")+ theme(axis.text.x = element_text(angle = 60, hjust = 1))
+```
+
+#What Google platforms do you mostly use
+```{r}
+library(ggplot2)
+
+Google_Platforms <- as.factor(data_survey$What.Google.platforms.do.you.mostly.use)
+
+ggplot(data_survey, aes(x=Google_Platforms, fill=Google_Platforms)) +
+  geom_bar() +
+  labs(title="Google Platforms Mostly Used by Respondents", x="Google Platforms Used", y="Count") + 
+  theme_minimal() +
+  theme(plot.title = element_text(size = 5), 
+        axis.title = element_text(size = 5), 
+        axis.text = element_text(size = 5),  
+        legend.title = element_text(size = 5), 
+        legend.text = element_text(size = 5)) + 
+  scale_fill_discrete(name = "Google Platforms")+ theme(axis.text.x = element_text(angle = 60, hjust = 1))
+
+```
+
+#What specific time do you usually use Google platforms on daily basis?
+```{r}
+Time_of_Day <- as.factor(data_survey$What.specific.time.do.you.usually.use.Google.platforms.on.daily.basis)
+
+ggplot(data_survey, aes(x=Time_of_Day, fill=Time_of_Day)) +
+  geom_bar() +
+  labs(title="Time Respondents Usually Use Google platforms", x="Time", y="Count") + theme_minimal() + theme(plot.title = element_text(size = 5), 
+        axis.title = element_text(size = 10), 
+        axis.text = element_text(size = 10),  
+        legend.title = element_text(size = 10), 
+        legend.text = element_text(size = 10)) + 
+  scale_fill_discrete(name = "Google Platforms")+ theme(axis.text.x = element_text(angle = 60, hjust = 1))
+```
+
+#What purposes do you use Google platforms for?
+```{r}
+Purposes <- as.factor(data_survey$What.purposes.do.you.use.Google.platforms.for)
+
+ggplot(data_survey, aes(x=Purposes, fill=Purposes)) +
+  geom_bar() +
+  labs(title="Respondents' Purpose in Using Google Platforms", x="Purpose", y="Count") + theme_minimal() +
+theme(plot.title = element_text(size = 5), 
+        axis.title = element_text(size = 5), 
+        axis.text = element_text(size = 5),  
+        legend.title = element_text(size = 5), 
+        legend.text = element_text(size = 5)) + 
+  scale_fill_discrete(name = "Google Platforms")+ theme(axis.text.x = element_text(angle = 60, hjust = 1))
+```
+#Do you find google platform useful in your everyday life
+```{r}
+(Usefullness <- factor(data_survey$Do.you.find.Google.platforms.useful.in.your.everyday.life.))
+Usefullness1 <- as.numeric(Usefullness)
+mean(Usefullness1)
+sd(Usefullness1)
+```
+
+#Does Google enable you to complete your task more Quickly
+```{r}
+(Task <- factor(data_survey$Does.Google.platforms.enable.you.to.accomplish.tasks.more.quickly.))
+Task1 <- as.numeric(Task)
+mean(Task1)
+sd(Task1)
+```
+#Do using platforms increase your productivity
+```{r}
+(Productivity <- factor(data_survey$Does.using.Google.platforms.increase.your.productivity.))
+Productivity1 <- as.numeric(Productivity)
+mean(Productivity1)
+sd(Productivity1)
+```
+# "By using Google platforms, do you believe it will make some aspects of life easier. For example, in academia or in your profession?  Please rate on a scale from 1 to 5
+```{r}
+Easier <- as.numeric(data_survey$By.using.Google.platforms..do.you.believe.it.will.make.some.aspects.of.life.easier..For.example..in.academia.or.in.your.profession...Please.rate.on.a.scale.from.1.to.5)
+mean(Easier)
+sd(Easier)
+```
+#Is your interaction with Google Platforms clear and understandable?
+```{r}
+Understandable <- as.numeric(data_survey$Is.your.interaction.with.Google.Platforms.clear.and.understandable.)
+mean(Understandable)
+sd(Understandable)
+```
+#Do you find it easy to become skillful at using Google platforms?
+```{r}
+skill <- as.numeric(data_survey$Do.you.find.it.easy.to.become.skillful.at.using.Google.platforms.)
+mean(skill)
+sd(skill)
+```
+#Do you find using Google platforms easy?
+```{r}
+platform <- as.numeric(data_survey$Do.you.find.using.Google.platforms.easy.)
+mean(platform)
+sd(platform)
+```
+#Did you find learning to operate Google platforms easy?
+```{r}
+operate <- as.numeric(data_survey$Did.you.find.learning.to.operate.Google.platforms.easy.)
+mean(operate)
+sd(operate)
+```
+#Do you think using Google platforms is a good idea or a bad idea?
+```{r}
+(idea <- factor(data_survey$Do.you.think.using.Google.platforms.is.a.good.idea.or.a.bad.idea.))
+idea1 <- as.numeric(idea)
+mean(idea1)
+sd(idea1)
+```
+#Does Google platforms make your task/s more interesting?
+```{r}
+(interest <- factor(data_survey$Does.Google.platforms.make.your.task.s.more.interesting.))
+interest1 <- as.numeric(interest)
+mean(interest1)
+sd(interest1)
+```
+#Did you find using Google platforms fun? 
+```{r}
+(fun <- factor(data_survey$Did.you.find.using.Google.platforms.fun.))
+fun1 <- as.numeric(fun)
+mean(fun1)
+sd(fun1)
+```
+#Do you like using Google platforms?
+```{r}
+(like <- factor(data_survey$Do.you.like.using.Google.platforms.))
+like1 <- as.numeric(like)
+mean(like1)
+sd(like1)
+```
+#Do people who influence your behavior think that you should use Google platforms?
+```{r}
+(p_influence <- factor(data_survey$Do.people.who.influence.your.behavior.think.that.you.should.use.Google.platforms.))
+p_influence1 <- as.numeric(p_influence)
+mean(p_influence1)
+sd(p_influence1)
+```
+#Do people who are important to you think that you should use Google platforms?
+```{r}
+(p_important <- factor(data_survey$Do.people.who.are.important.to.you.think.that.you.should.use.Google.platforms.))
+p_important1 <- as.numeric(p_important)
+mean(p_important1)
+sd(p_important1)
+```
+#Has the senior management of your academic or work environment been helpful in the use of Google platforms?
+```{r}
+(senior <- factor(data_survey$Has.the.senior.management.of.your.academic.or.work.environment.been.helpful.in.the.use.of.Google.platforms.))
+senior1 <- as.numeric(senior)
+mean(senior1)
+sd(senior1)
+```
+#In general, does your academic or work environment support the use of Google platforms?
+```{r}
+(w_environment <- factor(data_survey$In.general..does.your.academic.or.work.environment.support.the.use.of.Google.platforms.))
+w_environment1 <- as.numeric(w_environment )
+mean(w_environment1)
+sd(w_environment1)
+```
+#Do you have the necessary resources to use Google platforms?
+```{r}
+(resources <- factor(data_survey$Do.you.have.the.necessary.resources.to.use.Google.platforms.))
+resources1 <- as.numeric(resources)
+mean(resources1)
+sd(resources1)
+```
+#Do you have the knowledge necessary to use Google platforms?
+```{r}
+(knowledge <- factor(data_survey$Do.you.have.the.knowledge.necessary.to.use.Google.platforms.))
+knowledge1 <- as.numeric(knowledge)
+mean(knowledge1)
+sd(knowledge1)
+```
+#Do you find Google platforms not compatible with other systems you use? 
+```{r}
+(compatible <- factor(data_survey$Do.you.find.Google.platforms.not.compatible.with.other.systems.you.use.))
+compatible1 <- as.numeric(compatible)
+mean(compatible1)
+sd(compatible1)
+```
+#Is there a specific person (or group) available for assistance if you face difficulties with Google platforms?
+```{r}
+(p_specific <- factor(data_survey$Is.there.a.specific.person..or.group..available.for.assistance.if.you.face.difficulties.with.Google.platforms.))
+p_specific1 <- as.numeric(p_specific)
+mean(p_specific1)
+sd(p_specific1)
+```
+#Do you think you could complete a job or task using Google platforms without anyone around to guide or help you?
+```{r}
+(job_comp <- factor(data_survey$Do.you.think.you.could.complete.a.job.or.task.using.Google.platforms.without.anyone.around.to.guide.or.help.you.))
+job_comp1 <- as.numeric(job_comp)
+mean(job_comp1)
+sd(job_comp1)
+```
+#Do you think you could complete a job or task using Google platforms if you could call for someone for help if you got stuck?
+```{r}
+(s_call <- factor(data_survey$Do.you.think.you.could.complete.a.job.or.task.using.Google.platforms.if.you.could.call.for.someone.for.help.if.you.got.stuck.))
+s_call1 <- as.numeric(s_call)
+mean(s_call1)
+sd(s_call1)
+```
+#Do you think you could complete a job or task using Google platforms if given a lot of time to complete it?
+```{r}
+(lot_time <- factor(data_survey$Do.you.think.you.could.complete.a.job.or.task.using.Google.platforms.if.given.a.lot.of.time.to.complete.it.))
+lot_time1 <- as.numeric(lot_time)
+mean(lot_time1)
+sd(lot_time1)
+```
+#Do you think you could complete a job or task using Google platforms if you only have the built-in help facility for assistance?
+```{r}
+(built_in <- factor(data_survey$Do.you.think.you.could.complete.a.job.or.task.using.Google.platforms.if.you.only.have.the.built.in.help.facility.for.assistance.))
+built_in1 <- as.numeric(built_in)
+mean(built_in1)
+sd(built_in1)
+```
+#Do you feel apprehensive/uneasy about using Google platforms?
+```{r}
+( apprehensive <- factor(data_survey$Do.you.feel.apprehensive.uneasy.about.using.Google.platforms.))
+apprehensive1 <- as.numeric( apprehensive)
+mean(apprehensive1)
+sd(apprehensive1)
+```
+#Does it scare you that you could lose information by hitting the wrong key while using Google platforms?
+```{r}
+( scare <- factor(data_survey$Does.it.scare.you.that.you.could.lose.information.by.hitting.the.wrong.key.while.using.Google.platforms.))
+scare1 <- as.numeric( scare)
+mean(scare1)
+sd(scare1)
+```
+#How hesitant are you on using Google platforms for fear of making mistakes you cannot correct? Please rate on a scale from 1 to 5 
+```{r}
+hesitant <- as.numeric(data_survey$How.hesitant.are.you.on.using.Google.platforms.for.fear.of.making.mistakes.you.cannot.correct..Please.rate.on.a.scale.from.1.to.5)
+mean(hesitant)
+sd(hesitant)
+```
+#Do you find Google platforms somewhat intimidating?
+```{r}
+( intimidating <- factor(data_survey$Do.you.find.Google.platforms.somewhat.intimidating.))
+intimidating1 <- as.numeric(intimidating)
+mean(intimidating1)
+sd(intimidating1)
+```
+#Do you intend to use Google platforms in the next months?
+```{r}
+( intend <- factor(data_survey$Do.you.intend.to.use.Google.platforms.in.the.next.months.))
+intend1 <- as.numeric( intend)
+mean(intend1)
+sd(intend1)
+```
+#Do you predict that you would use Google platforms in the next months?
+```{r}
+( prediction <- factor(data_survey$Do.you.predict.that.you.would.use.Google.platforms.in.the.next.months.))
+prediction1 <- as.numeric( prediction)
+mean(prediction1)
+sd(prediction1)
+```
+#Do you plan to use Google Platforms in the next months?
+```{r}
+( plan <- factor(data_survey$do))
+plan1 <- as.numeric( plan)
+mean(plan1)
+sd(plan1)
 ```
